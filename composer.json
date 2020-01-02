@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "": "vendor\\glenleao\\php-classes\\src"
+            "Glen\\": "vendor\\gln\\php-classes\\src"
         }
     }
 }
