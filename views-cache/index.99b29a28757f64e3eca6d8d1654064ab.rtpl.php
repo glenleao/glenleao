@@ -8,7 +8,7 @@
         <div class="mask">
           <h2>Divulgação de eventos</h2>
           <p>Criação de material visual para divulgação de eventos.</p>
-          <a href="divulgacao.html" class="info">veja mais</a>
+          <a href="/divulgacao" class="info">veja mais</a>
         </div>
       </div>
     </div>
@@ -19,7 +19,7 @@
         <div class="mask">
           <h2>Logomarcas</h2>
           <p>Criação de logomarcas.</p>
-          <a href="divulgacao.html" class="info">veja mais</a>
+          <a href="divulgacao" class="info">veja mais</a>
         </div>
       </div>
     </div>
@@ -30,7 +30,7 @@
         <div class="mask">
           <h2>Peças comemorativas</h2>
           <p>Criação de imagens comemorativas.</p>
-          <a href="#" class="info">veja mais</a>
+          <a href="pecas-comemorativas" class="info">veja mais</a>
         </div>
       </div>
     </div>

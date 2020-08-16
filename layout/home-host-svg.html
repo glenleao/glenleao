@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Glenuilde Leão | GLN~DSGNDEV">
+  	<meta name="generator" content="Sublime Text" />
+	<title>Animação SVG</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/gln.css">
+	<link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@300;500;800&display=swap" rel="stylesheet">
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+			font-family: 'Encode Sans Semi Expanded', sans-serif;
+		}
+
+		h1 {
+			color: #fff;
+			font-size: max(40px, 4vw);
+			text-align: center;
+		}
+		
+		header,
+		section {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			height: 100vh;
+			overflow: hidden;
+		}
+
+		section {
+			background: #66c3d0;
+			/*background-image: url(assets/trigo.jpg);*/
+			background-size: cover;
+		}
+		header{
+			/*background: #024b61;*/
+			/*position: relative;*/
+		}
+
+		header h1 {
+			border: 5px solid #fff;
+			padding: 10px 50px;
+			margin: 5vw;
+			font-weight: 800;
+		}
+
+		header h4 {
+			font-size: 2.4rem;
+			font-weight: lighter;
+		}
+		.perfil{
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+		}
+		/*.navbar{
+			color: #fff;
+			display: inline-flex;
+			list-style: none;
+		}*/
+		.navbar li a{
+			padding: 10px;
+			display: block;
+			color: #fff;
+			text-transform: uppercase;
+			/*width: 60px;*/
+		}
+		.navbar li a:hover {
+			background: #343A40;
+			color: #fff;
+			transition: background 1s;
+			cursor: pointer;
+			border-radius: 2px;
+		}
+		
+		.gradient {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			/*width: 100vh;*/
+			/*background: linear-gradient(45deg, #6D2E46, #A26769, #D5B9B2, #ECE2D0, #CEBEBE);*/
+			  background: radial-gradient(#172136, #13161D, #13151A);
+
+			background-size: 300% 300%;
+			animation: colors 5s ease infinite;
+		}
+		@keyframes colors {
+			0% {
+				background-position: 0% 50%;
+			}
+			50% {
+				background-position: 100% 50%;
+			}
+			100% {
+				background-position: 0% 50%;
+			}
+		}
+
+		.hero-text {
+		  text-align: center;
+		  position: absolute;
+		  color: white;
+		}
+		.imagebox {
+			overflow: hidden;
+		}
+		.fig {
+			display: block;
+			float: left;
+			position: relative;
+			max-width: 20%;
+			margin: 12px;
+			transition: transform 2s;
+		}
+		.fig:hover {
+			transform: scale(1.1);
+			cursor: pointer;
+		}
+		@media (max-width: 576px){
+			.fig {
+				max-width:80%;
+			}
+		}
+
+.formulario {
+  background: #000;
+}
+
+.formulario h4 {
+  color: #fff;
+}
+
+.formulario svg {
+  color: #fff;
+  margin-right: 15px;
+}
+
+.formulario input {
+  margin-bottom: 21px;
+}
+
+.formulario input[type="text"], input[type="email"] {
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  font-size: 1em;
+}
+.formulario textarea {
+	border: 1px solid #fff;
+	background: transparent;
+	color: #fff;
+	outline: none;
+}
+
+.formulario input[type="submit"] {
+  border: none;
+  outline: none;
+  width: 120px;
+  height: 35px;
+  color: #000;
+  background: #fff;
+  border-radius: 20px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.formulario input[type="submit"]:hover {
+  cursor: pointer;
+  background: #C62202;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+	</style>
+</head>
+<body >
+
+	<nav class="navbar navbar-expand-lg text-white justify-content-between sticky-top">
+  <a class="navbar-brand d-none d-sm-block" href="#">Logo</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link pags" href="#">Perfil</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link pags" href="#">Imagens</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link pags" href="#">Contato</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+	<header class="gradient">
+		<div class="hero-text">
+		<h1>GLEN DSGN&DEV</h1>
+		<h4>Fazendo arte através das linhas de código</h4>
+		<h3 style="font-weight: lighter;">Identidade visual e desenvolvimento web</h3>
+
+		<!-- <button class="btn btn-danger btn-lg">conteudo</button> -->
+	</div>
+
+<svg class="perfil" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12640.42 1890.95">
+	<path fill="#000" fill-opacity=".3" d="M-0 0l0 1126.09c3481.9,-1044.36 1317.12,2037.28 6140.53,123.73 943.97,-374.49 1616.3,1209.77 3464.32,340.05 2029,-954.89 2151.05,-475.82 3035.56,-149.19l0 -1440.67 -12640.42 0z"/>
+	<path  fill="#B20000" fill-opacity="1" d="M-0 0l0 1322.97c3481.9,-1044.35 2006.31,1648.62 6233.37,-219.93 928.83,-410.59 2178.28,1023.79 3637.03,486.96 1647.84,-606.41 1581.7,-456.75 2770.02,201.82l0 -1791.83 -12640.42 0z"/>
+	<path fill="#F57209" fill-opacity=".3" d="M-0 0l0.07 1055.78c3481.9,-1044.36 2323.87,1519.65 6150.95,-31.28 941.19,-381.42 2119.98,936.84 3578.72,400.01 1647.84,-606.42 1722.36,-786.14 2910.67,-127.58l0 -1296.94 -12640.42 0z"/>
+  <!-- <path fill="#fff" fill-opacity="1" d="M0,160L288,96L576,192L864,96L1152,128L1440,96L1440,0L1152,0L864,0L576,0L288,0L0,0Z"></path> -->
+</svg>
+	</header>
+	<section>
+		<div class="formulario">
+			<form method="POST" action="proc_cad_msg.php">
+      			<input type="text" name="nome" placeholder="Inserir seu  nome"><br><br>
+      			<input type="email" name="email" placeholder="Inserir seu  email"><br><br>     
+      			<textarea name="mensagem" rows="3" cols="50" placeholder="Deixe sua mensagem"></textarea><br><br>
+      			<input type="submit" name="SendCadCont" value="Cadastrar">   
+    		</form>
+		</div>
+	</section>
+	<footer>
+		<div class="">
+		</div>
+	</footer>
+
+	<script src="js/jquery.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.js" ></script>
+
+</body>
+</html>

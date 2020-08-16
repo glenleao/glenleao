@@ -32,7 +32,7 @@ class Model {
 
 		foreach ($data as $key => $value) {
 			
-			$this->{"set".$key}($value);
+			$this->{"set".$key}($value);//tudo que for chamado de forma dinamica colocar entre chaves {}
 
 		}
 
