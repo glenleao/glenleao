@@ -33,10 +33,6 @@ $app->get('/projeto-grafico', function() {
     $page->setTpl("projeto-grafico");
 });
 
-// $app->get('/contato', function() {
-//     $page = new Page();
-//     $page->setTpl("contato");
-// });
 
 $app->get('/portfolio', function() {
     $page = new Page();
@@ -256,7 +252,7 @@ $app->post("/admin/users/:iduser", function($iduser) {
 
 	$app->get("/admin/categories", function(){
 
-		User::verifyLogin();
+		// User::verifyLogin();
 
 		$categories = Category::listAll();
 		$page = new PageAdmin();
@@ -327,6 +323,18 @@ $app->post("/admin/users/:iduser", function($iduser) {
 
 		header("Location: /admin/categories");
 		exit;
+	});
+
+	$app->get("/categories/:idcategory", function($idcategory){
+
+		$category = new Category();
+		$category->get((int)$idcategory);
+
+		$page = new Page();
+		$page->setTpl("category", [
+			'category'=>$category->getValues(),
+			'products'=>[]
+		]);
 	});
 
 
