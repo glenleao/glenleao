@@ -6,14 +6,14 @@ use \Glen\DB\Sql;
 use \Glen\Model;
 use \Glen\Mailer;
 
-class Product extends Model {
+class Portfolio extends Model {
 
 	public static function listAll() 
 	{
 
 		$sql = new Sql();
 
-		return $sql->select("SELECT * FROM tb_products ORDER BY desproduct");
+		return $sql->select("SELECT * FROM tb_portfolio ORDER BY nome");
 
 	}
 
@@ -22,26 +22,27 @@ class Product extends Model {
 
 		$sql = new Sql();
 
-		$results = $sql->select("CALL sp_products_save(:idproduct, :desproduct, :vlprice, :vlwidth, :vlheight, :vllength, :vlweight, :desurl)", array(
-			"idproduct"=>$this->getidproduct(),
-			"desproduct"=>$this->getdesproduct(),
-			"vlprice"=>$this->getvlprice(),
-			"vlwidth"=>$this->getvlwidth(),
-			"vlheight"=>$this->getvlheight(),
-			"vllength"=>$this->getvllength(),
-			"vlweight"=>$this->getvlweight(),
+		$results = $sql->select("CALL sp_portfolio_save(:idportfolio, :nome, :titulo, :descricao, :desurl)", array(
+			"idportfolio"=>$this->getidportfolio(),
+			"nome"=>$this->getnome(),
+			"titulo"=>$this->gettitulo(),
+			"descricao"=>$this->getdescricao(),
 			"desurl"=>$this->getdesurl()
 		));
 
+		
+
 		$this->setData($results[0]);
+
 		Category::updateFile();
 	}
 
-	public function get($idproduct)
+	public function get($idportfolio)
 	{
 		$sql = new Sql();
-		$results = $sql->select("SELECT * FROM tb_products WHERE idproduct = :idproduct",[
-			"idproduct"=>$idproduct
+
+		$results = $sql->select("SELECT * FROM tb_portfolio WHERE idportfolio = :idportfolio",[
+			"idportfolio"=>$idportfolio
 		]);
 
 		$this->setData($results[0]);
@@ -51,8 +52,8 @@ class Product extends Model {
 	{
 		$sql = new Sql();
 
-		$sql->query("DELETE FROM tb_products where idproduct = :idproduct", [
-			"idproduct"=>$this->getidproduct() //aqui ele nao tem a variavel por isso uso do $this get
+		$sql->query("DELETE FROM tb_portfolio where idportfolio = :idportfolio", [
+			"idportfolio"=>$this->getidportfolio() //aqui ele nao tem a variavel por isso uso do $this get
 		]);
 
 	}
@@ -65,13 +66,13 @@ class Product extends Model {
 			"res". DIRECTORY_SEPARATOR .
 			"site". DIRECTORY_SEPARATOR .
 			"img" . DIRECTORY_SEPARATOR .
-			"products". DIRECTORY_SEPARATOR .
-			$this->getidproduct() . ".jpg"
+			"portfolio". DIRECTORY_SEPARATOR .
+			$this->getidportfolio() . ".jpg"
 
 		)) {
-			return "/res/site/img/products/". $this->getidproduct(). ".jpg";
+			return "/res/site/img/portfolio/". $this->getidportfolio(). ".jpg";
 		} else {
-			$url = "/res/site/img/product.jpg";
+			$url = "/res/site/img/portfolio.jpg";
 		}
 		return $this->setdesphoto($url);
 	}
@@ -106,8 +107,8 @@ class Product extends Model {
 		"res" . DIRECTORY_SEPARATOR .
 		"site" . DIRECTORY_SEPARATOR .
 		"img". DIRECTORY_SEPARATOR .
-		"products". DIRECTORY_SEPARATOR .
-		$this->getproduct() . ".jpg";
+		"portfolio". DIRECTORY_SEPARATOR .
+		$this->getportfolio() . ".jpg";
 
 		imagejpeg($image, $dist);
 
