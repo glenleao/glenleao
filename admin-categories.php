@@ -80,14 +80,20 @@ $app->get("/admin/categories", function(){
 		exit;
 	});
 
-	$app->get("/categories/:idcategory", function($idcategory){
 
-		$category = new Category();
+	$app->get ("/admin/categories/:idcategory/products", function($idcategory){
+
+		User::verifyLogin();
+		$category = new  Category();
 		$category->get((int)$idcategory);
 
-		$page = new Page();
-		$page->setTpl("category", [
-			'category'=>$category->getValues(),
-			'products'=>[]
+		$page = new PageAdmin();
+		$page->setTpl("categories-products", [
+			'category'=>$category->getValue(),
+			'productsRelated'=>[],
+			'productsNotRelated'=>[]
 		]);
+
+
+
 	});
