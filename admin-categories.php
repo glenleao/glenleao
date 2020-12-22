@@ -4,10 +4,11 @@ use \Glen\Page;
 use \Glen\PageAdmin;
 use \Glen\Model\User;
 use \Glen\Model\Category;
+use \Glen\Model\Product;
 
 $app->get("/admin/categories", function(){
 
-		 User::verifyLogin();
+		User::verifyLogin();
 
 		$categories = Category::listAll();
 		$page = new PageAdmin();
@@ -17,16 +18,15 @@ $app->get("/admin/categories", function(){
 
 	});
 
-	$app->get("/admin/categories/create", function(){
+$app->get("/admin/categories/create", function(){
 
 		User::verifyLogin();
 
 		$page = new PageAdmin();
 		$page->setTpl("categories-create");
-
 	});
 
-	$app->post("/admin/categories/create", function(){
+$app->post("/admin/categories/create", function(){
 
 		User::verifyLogin();
 
@@ -40,7 +40,7 @@ $app->get("/admin/categories", function(){
 		exit;
 	});
 
-	$app->get("/admin/categories/:idcategory/delete", function($idcategory){
+$app->get("/admin/categories/:idcategory/delete", function($idcategory){
 
 		User::verifyLogin();
 
@@ -55,7 +55,7 @@ $app->get("/admin/categories", function(){
 	});
 
 
-	$app->get("/admin/categories/:idcategory", function($idcategory){
+$app->get("/admin/categories/:idcategory", function($idcategory){
 
 		User::verifyLogin();
 
@@ -68,7 +68,7 @@ $app->get("/admin/categories", function(){
 		]);
 	});
 
-	$app->post("/admin/categories/:idcategory", function($idcategory){
+$app->post("/admin/categories/:idcategory", function($idcategory){
 
 		User::verifyLogin();
 		$category = new Category();
@@ -81,7 +81,7 @@ $app->get("/admin/categories", function(){
 	});
 
 
-	$app->get ("/admin/categories/:idcategory/products", function($idcategory){
+$app->get ("/admin/categories/:idcategory/products", function($idcategory){
 
 		User::verifyLogin();
 		$category = new  Category();
@@ -89,11 +89,39 @@ $app->get("/admin/categories", function(){
 
 		$page = new PageAdmin();
 		$page->setTpl("categories-products", [
-			'category'=>$category->getValue(),
-			'productsRelated'=>[],
-			'productsNotRelated'=>[]
+			'category'=>$category->getValues(),
+			'productsRelated'=>$category->getProducts(),
+			'productsNotRelated'=>$category->getProducts(false)
+			
 		]);
 
+	});
 
+$app->get ("/admin/categories/:idcategory/products/:idproduct/add", function($idcategory, $idproduct){
 
+		User::verifyLogin();
+		$category = new  Category();
+		$category->get((int)$idcategory);
+
+		$product = new Product();
+		$product->get((int)$idproduct);
+		$category->addProduct($product);
+
+		header("Location: /admin/categories/".$idcategory."/products");
+		exit;
+
+	});	
+
+$app->get ("/admin/categories/:idcategory/products/:idproduct/remove", function($idcategory, $idproduct){
+
+		User::verifyLogin();
+		$category = new  Category();
+		$category->get((int)$idcategory);
+
+		$product = new Product();
+		$product->get((int)$idproduct);
+		$category->removeProduct($product);
+
+		header("Location: /admin/categories/".$idcategory."/products");
+		exit;
 	});

@@ -2,6 +2,7 @@
 
 use \Glen\Page;
 use \Glen\Model\Product;
+use \Glen\Model\Category;
 
 
 $app->get('/', function() {
@@ -20,7 +21,7 @@ $app->get('/', function() {
         $page = new Page();
         $page->setTpl("category", [
             'category'=>$category->getValues(),
-            'products'=>[]
+            'products'=>Product::checklist($category->getProducts())
         ]);
     });
 
