@@ -3,6 +3,7 @@
 use \Glen\Page;
 use \Glen\Model\Product;
 use \Glen\Model\Category;
+use \Glen\Model\Cart;
 
 
 $app->get('/', function() {
@@ -39,6 +40,8 @@ $app->get('/', function() {
         ]);
     });
 
+
+
 $app->get("/products/:desurl", function($desurl){
 
     $product = new Product();
@@ -51,6 +54,16 @@ $app->get("/products/:desurl", function($desurl){
         'categories'=>$product->getCategories()
     ]);
 });
+
+// aqui começa a parte de comercio aula 116
+
+$app->get("/cart", function(){
+    $cart = Cart::getFromSession();
+    $page = new Page();
+    $page->setTpl("cart");
+});
+
+// termina parte de commercio
 
 
 $app->get('/divulgacao', function() {

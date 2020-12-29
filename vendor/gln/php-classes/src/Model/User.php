@@ -5,6 +5,7 @@ namespace Glen\Model;
 use \Glen\DB\Sql;
 use \Glen\Model;
 use \Glen\Mailer;
+// use \Glen\Model\Cart;
 
 class User extends Model {
 
@@ -16,6 +17,43 @@ class User extends Model {
 	// protected $fields = [
 	// 	"iduser", "idperson", "deslogin", "despassword", "inadmin", "dtergister"
 	// ];
+
+	public static function getFromSession()
+	{
+
+		$user = new User();
+		
+		if (isset($_SESSION[User::SESSION]) && (int)$_SESSION[User::SESSION]['iduser'] > 0) {
+			$user->setData($_SESSION[User::SESSION]);
+
+		}
+
+		return $user;
+	}
+
+	public static function checkLogin($inadmin = true)
+	{
+		if (
+			!isset($_SESSION[User::SESSION])
+			||
+			!$_SESSION[User::SESSION]
+			||
+			!(int)$_SESSION[User::SESSION]["iduser"] > 0
+
+		){
+			// não está logado
+			return false;
+		} else {
+			// neste momento verifica se é adm ou não para ter acesso a rota adm
+			if ($inadmin === true && (bool)$_SESSION[User::SESSION]['inadmin'] === true) {
+				return true;
+			}else if ($inadmin === false) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
 
 	public static function login($login, $password)
 	{
@@ -53,16 +91,7 @@ class User extends Model {
 	public static function verifyLogin($inadmin = true)
 	{
 
-		if (
-			!isset($_SESSION[User::SESSION])
-			||
-			!$_SESSION[User::SESSION]
-			||
-			!(int)$_SESSION[User::SESSION]["iduser"] > 0
-			||
-			(bool)$_SESSION[User::SESSION]["inadmin"] !== $inadmin
-			) 
-			{
+		if (!User::checkLogin($inadmin)) {
 
 			header("Location: /admin/login");
 			exit;
