@@ -76,9 +76,9 @@ $app->get("/cart/:idproduct/add", function($idproduct){
     exit;
 });
 
-$app->get ("cart/:idproduct/minus", function($idproduct){
+$app->get ("/cart/:idproduct/minus", function($idproduct){
     $product = new Product();
-    $product->get((int)$product);
+    $product->get((int)$idproduct);
     $cart = Cart::getFromSession();
     $cart->removeProduct($product);
 
@@ -86,9 +86,9 @@ $app->get ("cart/:idproduct/minus", function($idproduct){
     exit;
 });
 
-$app->get("cart/:idproduct/remove", function($idproduct){
+$app->get("/cart/:idproduct/remove", function($idproduct){
     $product = new Product();
-    $product->get((int)$product);
+    $product->get((int)$idproduct);
     $cart = Cart::getFromSession();
     $cart->removeProduct($product, true);
 
