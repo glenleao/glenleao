@@ -211,8 +211,8 @@ class User extends Model {
 							 $dataRecovery = $results2[0];
              
              
-				$code = openssl_encrypt($dataRecovery['idrecovery'], 'AES-128-CBC', pack("a16", User::SECRET), 0, pack("a16", User::SECRET_IV));
-				$code = base64_encode($code);
+				$codex = openssl_encrypt($dataRecovery['idrecovery'], 'AES-128-CBC', pack("a16", User::SECRET),0, pack("a16", User::SECRET_IV));
+				$code = base64_encode($codex);
 
              if ($inadmin === true) {
                  $link = "http://lojaglen.com/admin/forgot/reset?code=$code";
@@ -229,12 +229,13 @@ class User extends Model {
     }
 }
 
-	 public static function validForgotDecrypt($result)
- {
-     $result = base64_decode($result);
-     $code = mb_substr($result, openssl_cipher_iv_length('aes-256-cbc'), null, '8bit');
-     $iv = mb_substr($result, 0, openssl_cipher_iv_length('aes-256-cbc'), '8bit');;
-     $idrecovery = openssl_decrypt($code, 'aes-256-cbc', User::SECRET, 0, $iv);
+public static function validForgotDecrypt($code)
+	{
+
+		$code = base64_decode($code);
+
+		$idrecovery = openssl_decrypt($code, 'AES-128-CBC', pack("a16", User::SECRET), 0, pack("a16", User::SECRET_IV));
+
      $sql = new Sql();
      $results = $sql->select("
          SELECT *
@@ -259,6 +260,7 @@ class User extends Model {
          return $results[0];
      }
  }
+ 
 
  	public static function setForgotUsed($idrecovery)
  	{
